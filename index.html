@@ -1,0 +1,79 @@
+<!---------------------------------------------------------------------
+                Projeto feito por João Gabriel Santos
+O uso deste é permitido, desde que os devidos créditos sejam concedidos
+---------------------------------------------------------------------->
+
+<DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecionando ao formulário</title>
+    <link rel="stylesheet" type="text/css" href="style.css" media="screen" />
+    <script>
+        // Função que executará o código ao carregar a página
+        window.onload = function() { 
+            // Variáveis referentes à data e hora
+            var dataAtual = new Date();
+            var dia = dataAtual.getDate();
+            var mes = (dataAtual.getMonth() + 1);
+            var ano = dataAtual.getFullYear();
+            var horas = dataAtual.getHours();
+            var minutos = dataAtual.getMinutes();
+            var horario_comeco
+            
+            //Ajustar formatação ao padrão utilizado nos formulários google, utilizando sempre horário no formado xx:xx e data xx/xx/xxxx
+            if (horas < 10 && minutos < 10){
+                var horario_comeco = "0" + horas + ":" + "0" + minutos
+            }
+            if (horas >= 10 && minutos >= 10){
+                var horario_comeco = "" + horas + ":" + minutos
+            }
+            if (horas < 10){
+                var horario_comeco = "0" + horas + ":" + minutos
+            } 
+            if (minutos < 10) {
+                var horario_comeco = "" + horas + ":" + "0" + minutos
+            } 
+            
+
+            if (dia < 10 && mes < 10){
+                var dia_comeco = ano + "-0" + mes + "-0" + dia
+            }
+            if (dia >= 10 && mes >= 10){
+                var dia_comeco = ano + "-" + mes + "-" + dia
+            }
+            if (dia < 10){
+                var dia_comeco = ano + "-" + mes + "-0" + dia
+            }
+            if (mes < 10){
+                var dia_comeco = ano + "-0" + mes + "-" + dia
+            }
+
+            // Pega a url e armazena na variável "link"
+            var link = window.location.href
+            // Área destinada à montagem do link
+            var usuario = link.substring(link.indexOf("=") + 1);
+            var nick = (usuario).value
+            var trecho1 = "https://docs.google.com/forms/d/e/1FAIpQLSfuagZiyWgxBANx3zZ5vmoI9kW7tePfSOBzOSFa698SuPrPdg/viewform?usp=pp_url&entry.413199390="
+            var trecho2 = "&entry.610004531="
+            var trecho3 = "&entry.1063118197="
+            var urlget = trecho1 + link.substring(link.indexOf("=") + 1) + trecho2 + dia_comeco + "+" + horario_comeco + trecho3 + "CRO"
+            // Encaminhar ao formulário
+            window.location.href = urlget
+            
+            
+            //Link padrão
+            //https://docs.google.com/forms/d/e/1FAIpQLSfuagZiyWgxBANx3zZ5vmoI9kW7tePfSOBzOSFa698SuPrPdg/viewform?usp=pp_url&entry.413199390=%7BUSERNAME%7D&entry.610004531=0000-00-00+10:10&entry.1063118197=CRO
+            //Utilizando o forumeiros, o link deve seguir o seguinte modelo: link_hospedagem?={USERNAME} / Caso fora do fórum, utilizar o nome a ser preenchido no campo do nick após o "="
+        }
+    </script>
+</head>
+<body>
+
+    <h1 id="horario_inicio"></h1>
+    <h1 id="nick_sup"></h1>
+    <h1 id="url"></h1>
+</body>
+</html>
